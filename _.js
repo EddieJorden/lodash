@@ -45,14 +45,46 @@ const _ = {
 		for (let key in object) {
 			const originalValue = object[key];
 			invertedObject = { originalValue: key };
-			object[key] = originalValue;
 		}
 		return invertedObject;
 	},
-	specify() {},
+	findKey(object, predicate) {
+		for (let key in object) {
+			var value = object[key];
+			let predicateReturnValue = predicate(value);
+			if (predicateReturnValue === true) {
+				return key;
+			}
+		}
+		undefined;
+		return undefined;
+	},
+	drop(arr, num) {
+		if (num === undefined) {
+			num = 1;
+		}
+		const droppedArray = arr.slice(num, arr.length);
+		return droppedArray;
+	},
+	dropWhile(arr, pred) {
+		const callBack = (element, index) => {
+			return !pred(element, index, arr);
+		};
+		let dropNumber = arr.findIndex(callBack);
+		let droppedArray = this.drop(arr, dropNumber);
+		return droppedArray;
+	},
+	chunk(arr, size) {
+		if (size === undefined) {
+			size = 1;
+		}
+		let arrayChunks = [];
+		for (let i = 0; i < arr.length; i += size) {
+			let arrayChunk = arr.slice(i, i + size);
+			arrayChunks.push(arrayChunk);
+		}
+		return arrayChunks;
+	},
 };
 
-// {object[key].has((key = !undefined))};
-
-// Do not write or modify code below this line.
 module.exports = _;
