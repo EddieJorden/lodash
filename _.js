@@ -49,6 +49,7 @@ const _ = {
 		}
 		return invertedObject;
 	},
+	specify() {},
 };
 
 // {object[key].has((key = !undefined))};
